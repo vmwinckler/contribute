@@ -1,0 +1,11 @@
+{
+  "name": "genshindev-contrib",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "contribute": "yarn prisma studio"
+  },
+  "devDependencies": {
+    "@prisma/cli": "^2.10.0"
+  }
+}

@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Weapon {
+  Bow
+  Catalyst
+  Claymore
+  Polearm
+  Sword
+}
+
+// General
+model Character {
+  id            Int               @id
+  name          String            @unique
+  rarity        Int
+  overview      String?
+  profile       CharacterProfile?
+  talents       Talent[]
+  constelations Json?
+  weapon        Weapon?
+  // ascensions     Ascension[] TODO
+  // stats  Stats[] TODO
+  elements      Element[]
+}
+
+model Talent {
+  id          Int       @id
+  type        String?
+  name        String?
+  description Json?
+  details     Json?
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId Int
+}
+
+model CharacterProfile {
+  id           Int       @id
+  voiceActor   Json?
+  birthday     String?
+  affiliation  String?
+  vision       Element?  @relation(fields: [elementId], references: [id])
+  elementId    Int?
+  constelation String?
+  region       Region?   @relation(fields: [regionId], references: [id])
+  regionId     Int?
+  overview     String?
+  story        Json?
+  voiceLines   Json?
+  character    Character @relation(fields: [characterId], references: [id])
+  characterId  Int
+}
+
+model Element {
+  id                Int                @id
+  name              String             @unique
+  region            Region?            @relation(fields: [regionId], references: [id])
+  regionId          Int?
+  archon            String?
+  theme             String?
+  statusEffect      String?
+  characters        Character[]
+  characterProfiles CharacterProfile[]
+}
+
+model Region {
+  id               Int                @id
+  name             String             @unique
+  element          Element?
+  characterProfile CharacterProfile[]
+}
