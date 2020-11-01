@@ -17,17 +17,17 @@ enum Weapon {
 
 // General
 model Character {
-  id            Int               @id
-  name          String            @unique
-  rarity        Int
-  overview      String?
-  profile       CharacterProfile?
-  talents       Talent[]
-  constelations Json?
-  weapon        Weapon?
+  id             Int               @id
+  name           String            @unique
+  rarity         Int
+  overview       String?
+  profile        CharacterProfile?
+  talents        Talent[]
+  constellations Json?
+  weapon         Weapon?
   // ascensions     Ascension[] TODO
   // stats  Stats[] TODO
-  elements      Element[]
+  elements       Element[]
 }
 
 model Talent {
@@ -41,20 +41,20 @@ model Talent {
 }
 
 model CharacterProfile {
-  id           Int       @id
-  voiceActor   Json?
-  birthday     String?
-  affiliation  String?
-  vision       Element?  @relation(fields: [elementId], references: [id])
-  elementId    Int?
-  constelation String?
-  region       Region?   @relation(fields: [regionId], references: [id])
-  regionId     Int?
-  overview     String?
-  story        Json?
-  voiceLines   Json?
-  character    Character @relation(fields: [characterId], references: [id])
-  characterId  Int
+  id            Int       @id
+  voiceActor    Json?
+  birthday      String?
+  affiliation   String?
+  vision        Element?  @relation(fields: [elementId], references: [id])
+  elementId     Int?
+  constellation String?
+  region        Region?   @relation(fields: [regionId], references: [id])
+  regionId      Int?
+  overview      String?
+  story         Json?
+  voiceLines    Json?
+  character     Character @relation(fields: [characterId], references: [id])
+  characterId   Int
 }
 
 model Element {
